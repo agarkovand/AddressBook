@@ -1,4 +1,4 @@
-package pl.com.britenet.agarkov.AddressBook;
+package pl.com.britenet.agarkov.addressbook;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
