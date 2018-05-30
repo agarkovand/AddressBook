@@ -5,9 +5,11 @@ import lombok.Data;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
-import org.joda.time.LocalDate;
+
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -21,16 +23,19 @@ public class Person {
     private String firstName;
     private String lastName;
     private char gender;
-    @Type(type="date")
+
+    @Column(columnDefinition = "DATE")
     private LocalDate birthday;
     private String pesel;
 
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private Set<Phone> phones;
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "person")
+    private Set<Phone> phones = new HashSet<>();
 
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private Set<Email> emails;
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "person")
+    private Set<Email> emails = new HashSet<>();
 
 }
