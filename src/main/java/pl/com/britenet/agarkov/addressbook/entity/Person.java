@@ -8,8 +8,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Objects;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -26,12 +25,12 @@ public class Person {
     private LocalDate birthday;
     private String pesel;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Phone> phones;
+    private Set<Phone> phones;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Email> emails;
+    private Set<Email> emails;
 
 }

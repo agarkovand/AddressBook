@@ -3,11 +3,7 @@ package pl.com.britenet.agarkov.addressbook.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Objects;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
@@ -15,7 +11,9 @@ import java.util.Objects;
 public class Phone {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
     private String phone;
+
+    @ManyToOne
+    @JoinColumn(name="person_id", nullable=false)
+    private Person person;
 }
